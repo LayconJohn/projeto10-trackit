@@ -7,7 +7,7 @@ import { cadastrarUser } from "../../servicos/trackIt";
 
 import logo from "../../assets/images/logoPrincipal.png";
 
-import { Tela, Form, BotaoForm, LinkRota, EspacoForm, Logo } from "../../globalStyled";
+import { Tela, Form, BotaoForm, LinkRota, EspacoForm, Logo } from "../globalStyled";
 
 export default function Cadastro() {
     const [email, setEmail] = useState("");
