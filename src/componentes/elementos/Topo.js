@@ -27,6 +27,7 @@ const Header = styled.header`
     right: 0;
     box-sizing: border-box;
     z-index: 1;
+    margin-bottom: 100px;
 `;
 
 const MiniLogo = styled.h2`

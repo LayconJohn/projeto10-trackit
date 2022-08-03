@@ -9,7 +9,6 @@ const Tela = styled.div`
     align-items: center;
     overflow-x: hidden;
     box-sizing: border-box;
-    margin: 0 auto;
 `;
 
 const Logo = styled.img`
@@ -24,7 +23,6 @@ const Form = styled.input`
     border-radius: 5px;
     border: 1px solid #D4D4D4;
     margin-bottom: 6px;
-    
 `;
 
 const BotaoForm = styled.button`

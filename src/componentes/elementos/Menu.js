@@ -26,6 +26,7 @@ const Footer = styled.footer`
     left: 0;
     right: 0;
     z-index: 1;
+    margin-top: 100px;
 `;
 
 const BotaoHoje = styled.div`

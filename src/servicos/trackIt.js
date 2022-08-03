@@ -10,4 +10,24 @@ function loginUser(body) {
     return promisse
 }
 
-export {cadastrarUser, loginUser}
+function getHabitos(token) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+    const promisse = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", config)
+    return promisse
+}
+
+function postHabito(token, body) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+    const promisse = axios.post("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits", body, config);
+    return promisse
+}
+
+export {cadastrarUser, loginUser, getHabitos, postHabito}
