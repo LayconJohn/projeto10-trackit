@@ -30,4 +30,15 @@ function postHabito(token, body) {
     return promisse
 }
 
-export {cadastrarUser, loginUser, getHabitos, postHabito}
+function deleteHabito(token, idHabito) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+
+    const promisse = axios.delete(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${idHabito}`, config)
+    return promisse
+}
+
+export {cadastrarUser, loginUser, getHabitos, postHabito, deleteHabito}

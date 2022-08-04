@@ -16,6 +16,8 @@ export default function Habitos() {
     //state
     const [habitos, setHabitos] = useState([]);
     const [criandoHabito, setCriandoHabito] = useState(false);
+    const [deletandoHabito, setDeletandoHabito] = useState(false);
+
     //hooks
     const {user} = useContext(UserContext);
     //logic
@@ -25,7 +27,7 @@ export default function Habitos() {
             setHabitos(res.data)
             console.log(res.data)
         })
-    }, [criandoHabito])
+    }, [criandoHabito, deletandoHabito])
 
     function criarHabito() {
         setCriandoHabito(true);
@@ -46,7 +48,11 @@ export default function Habitos() {
                 {habitos.length === 0 ? "Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!"
                 :
                 habitos.map(habito => {
-                    return <Habito key={habito.id} habito={habito}/>
+                    return <Habito 
+                        key={habito.id} 
+                        habito={habito}
+                        setDeletandoHabito={setDeletandoHabito}
+                        />
                 })
                 }
             </EspacoHabitos>

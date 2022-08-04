@@ -1,11 +1,27 @@
 import styled from "styled-components";
-import { useState, useEffect} from 'react';
+import { useState, useEffect, useContext} from 'react';
+
+import { deleteHabito } from "../../servicos/trackIt";
+import UserContext from "../../context/UserContext";
 
 import {BsTrash} from 'react-icons/bs'
 import DiaSemana from "./DiaSemana";
 
-export default function Habito( {habito} ) {
+export default function Habito( {habito, setDeletandoHabito} ) {
     const [diasSelecionados, setDiasSelecionados] = useState([]);
+
+    const {user} = useContext(UserContext);
+
+    function deletarHabito() {
+        setDeletandoHabito(true)
+        if (window.confirm("Você realmente deseja deletar esse hábito?")) {
+            deleteHabito(user.token, habito.id).then((res) => {
+                alert("Hábito Deletado com sucesso");
+                console.log(res)
+                setDeletandoHabito(false);
+            })
+        }
+    }
 
     useEffect( () => {
         const array = [
@@ -32,7 +48,7 @@ export default function Habito( {habito} ) {
             <DiasSemana>
                 {diasSelecionados.map((dia, i) => {return <DiaSemana key={i} dia={dia} criando={false}/>})}
             </DiasSemana>
-            <IconeExcluirHabito> <BsTrash /> </IconeExcluirHabito>
+            <IconeExcluirHabito onClick={deletarHabito}> <BsTrash /> </IconeExcluirHabito>
         </CardHabito>
     )
 }
