@@ -1,33 +1,22 @@
 import styled from "styled-components";
 import {useState, useEffect, useContext} from 'react';
+import { useNavigate } from "react-router-dom";
 
 import { Form } from "../globalStyled";
 import UserContext from "../../context/UserContext";
 import {postHabito} from '../../servicos/trackIt';
+import DiaSemana from "./DiaSemana";
 
-function DiaSemana({dia}) {
-    const [selecionado, setSelecionado] = useState(dia.isSelected);
 
-    function selecionarDia() {
-        setSelecionado(!selecionado)
-        dia.isSelected = !dia.isSelected;
-    }
-
-    return (
-        <CardDiaSemana onClick={selecionarDia} selected={selecionado}>
-            {dia.nome}
-        </CardDiaSemana>
-    )
-}
-
-export default function NovoHabito( {criandoHabito}) {
+export default function NovoHabito( {criandoHabito, setCriandoHabito}) {
     //state
     const [dias, setDias] = useState([]);
     const [nomeHabito, setNomeHabito] = useState("");
     const [disabled, setDisabled] = useState(false);
 
     //hooks
-    const {user} = useContext(UserContext)
+    const {user} = useContext(UserContext);
+    const navigate = useNavigate();
 
     //logic
     useEffect( () => {
@@ -61,13 +50,40 @@ export default function NovoHabito( {criandoHabito}) {
             .then( (res) => {
                 setDisabled(false)
                 console.log(res.data)
+                setCriandoHabito(false);
+                resetarCriacaoHabito();
             })
             .catch( (err) => {
-                console.log(err)
+                console.log(err);
+                tratarErro(err);
             })
-
     }
 
+    function tratarErro(err) {
+        switch (err.code) {
+            case 401:
+                alert("Tempo de login expirado, faça o login novamente");
+                navigate("/");
+                break;
+            case 422:
+                alert("Houve um erro, tente novamente");
+                break;
+        }
+        resetarCriacaoHabito();
+    }
+
+    function resetarCriacaoHabito() {
+        setNomeHabito("");
+        setDias([
+            {nome: "D", isSelected: false},
+            {nome: "S", isSelected: false},
+            {nome: "T", isSelected: false},
+            {nome: "Q", isSelected: false},
+            {nome: "Q", isSelected: false},
+            {nome: "S", isSelected: false},
+            {nome: "S", isSelected: false}
+        ])
+    }
     //render
     return (
         <CardNovoHabito criandoHabito={criandoHabito}>
@@ -81,11 +97,11 @@ export default function NovoHabito( {criandoHabito}) {
             />
             <DiasSemana>
                 {dias.map(dia => {
-                    return <DiaSemana dia={dia} />
+                    return <DiaSemana dia={dia} criando={true}/>
                 })}
             </DiasSemana>
             <Botoes>
-                <Botao corFundo="#FFF" cor="#52B6FF" disabled={disabled}>Cancelar</Botao>
+                <Botao corFundo="#FFF" cor="#52B6FF" disabled={disabled} onClick={() => setCriandoHabito(false)}>Cancelar</Botao>
                 <Botao corFundo="#52B6FF" cor="#FFF" disabled={disabled} onClick={salvarHabito}>Salvar</Botao>
             </Botoes>
         </CardNovoHabito>
@@ -110,19 +126,6 @@ const DiasSemana = styled.div`
     justify-content: flex-start;
     align-items: center;
     margin: 8px 0px 29px 0px;
-`;
-
-const CardDiaSemana = styled.div`
-    width: 30px;
-    height: 30px;
-    border-radius: 5px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border: 1px solid #D4D4D4;
-    background-color: ${props => props.selected ? "#CFCFCF" : "#FFF"};
-    color: ${props => props.selected ? "#FFF" : "#DBDBDB"};
-    margin-right: 4px;
 `;
 
 const Botoes = styled.div`

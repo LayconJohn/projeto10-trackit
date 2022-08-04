@@ -27,6 +27,7 @@ const Footer = styled.footer`
     right: 0;
     z-index: 1;
     margin-top: 100px;
+    background-color: rgba(229, 229, 229, 0.5);
 `;
 
 const BotaoHoje = styled.div`
