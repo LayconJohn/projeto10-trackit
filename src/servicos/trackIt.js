@@ -41,4 +41,34 @@ function deleteHabito(token, idHabito) {
     return promisse
 }
 
-export {cadastrarUser, loginUser, getHabitos, postHabito, deleteHabito}
+function getHabitosDia(token) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+    const promisse = axios.get("https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today", config);
+    return promisse
+}
+
+function checkHabito(token, idHabito) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+    const promisse = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${idHabito}/check`, null, config);
+    return promisse
+}
+
+function uncheckHabito(token, idHabito) {
+    const config = {
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    }
+    const promisse = axios.post(`https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${idHabito}/uncheck`, null, config);
+    return promisse
+}
+
+export {cadastrarUser, loginUser, getHabitos, postHabito, deleteHabito, getHabitosDia, checkHabito, uncheckHabito}

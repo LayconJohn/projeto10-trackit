@@ -12,7 +12,7 @@ export default function Menu( {children, isDisplay} ) {
 
 const EspacoTitulo = styled.div`
     width: 100%;
-    display: ${props => props.isDisplay ? "flex" : "Inherit"};
+    display: ${props => props.isDisplay};  
     justify-content: space-between;
     align-items: center;
     font-family: 'Lexend Deca', sans-serif;

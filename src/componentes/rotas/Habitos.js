@@ -22,7 +22,7 @@ export default function Habitos() {
     const {user} = useContext(UserContext);
     //logic
 
-    useEffect( () => {
+    useEffect( () => {  
         getHabitos(user.token).then((res) => {
             setHabitos(res.data)
             console.log(res.data)
@@ -36,7 +36,7 @@ export default function Habitos() {
     return (
         <Tela>
             <Topo />
-            <TituloTela isDisplay={true}>
+            <TituloTela isDisplay="flex">
                 <h2>Hábitos</h2>
                 <div onClick={criarHabito}>+</div>
             </TituloTela>
