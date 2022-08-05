@@ -4,7 +4,7 @@ import {useState, useContext} from 'react';
 import UserContext from '../../context/UserContext';
 import { checkHabito, uncheckHabito } from '../../servicos/trackIt';
 
-export default function HabitoDia({habitoDia}) {
+export default function HabitoDia({ habitoDia, habitosDia, setHabitosMarcados }) {
     //state
     const [habitoFeito, setHabitoFeito] = useState(habitoDia.done)
 
@@ -43,6 +43,7 @@ export default function HabitoDia({habitoDia}) {
         } else {
             marcarHabito();
         }
+        setHabitosMarcados(habitosDia.filter( habito => habito.done === true))
     }
 
     //render

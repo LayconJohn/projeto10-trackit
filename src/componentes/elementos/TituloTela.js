@@ -26,11 +26,6 @@ const EspacoTitulo = styled.div`
         margin-left: 17px;
     }
 
-    p {
-        color: #BABABA;
-        font-size: 18px;
-    }
-
     div {
         width: 40px;
         height: 35px;
