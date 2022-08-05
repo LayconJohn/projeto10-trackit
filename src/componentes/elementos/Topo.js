@@ -1,13 +1,16 @@
 import { useState, useContext } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import UserContext from "../../context/UserContext";
 
 export default function Topo() {
+
+    const navigate = useNavigate();
     const {user} = useContext(UserContext)
     return (
         <Header>
-            <MiniLogo>TrackIt</MiniLogo>
+            <MiniLogo onClick={() => navigate("/")}>TrackIt</MiniLogo>
             <FotoPerfil src={user.image} alt={user.name}/>
         </Header>
     )

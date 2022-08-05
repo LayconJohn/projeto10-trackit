@@ -43,7 +43,7 @@ export default function HabitoDia({ habitoDia, habitosDia, setHabitosMarcados })
         } else {
             marcarHabito();
         }
-        setHabitosMarcados(habitosDia.filter( habito => habito.done === true))
+        setHabitosMarcados(habitosDia.filter( habito => habito.done === true));
     }
 
     //render
@@ -51,8 +51,8 @@ export default function HabitoDia({ habitoDia, habitosDia, setHabitosMarcados })
         <CardHabitoDia>
             <DescricaoCard>
                 <h4>{habitoDia.name}</h4>
-                <p>Sequência atual: {habitoDia.currentSequence} dias</p>
-                <p>Seu recorde: {habitoDia.highestSequence} dias</p>
+                <p>Sequência atual: <DescricaoSequencia isRecord={habitoFeito}> {habitoDia.currentSequence} dias </DescricaoSequencia></p>
+                <p>Seu recorde: <DescricaoSequencia isRecord={habitoDia.currentSequence === habitoDia.highestSequence && habitoDia.highestSequence !== 0}> {habitoDia.highestSequence} dias</DescricaoSequencia></p>
             </DescricaoCard>
             <BotaoCheck feito={habitoDia.done} onClick={selecionarHabitoDia}>✔️</BotaoCheck>
         </CardHabitoDia>
@@ -85,6 +85,13 @@ const DescricaoCard = styled.div`
         font-size: 13px;
         margin: 0;
     }
+
+`;
+
+const DescricaoSequencia = styled.span`
+        font-size: 13px;
+        margin: 0;
+        color: ${props => props.isRecord ? "#8FC549" : "#666666"};
 `;
 
 const BotaoCheck = styled.div`

@@ -37,8 +37,12 @@ export default function Hoje() {
                 <SubTitulo habitoFeito={habitosMarcados.lenght === 0}>{habitosMarcados.lenght === 0 ? "Nenhum hábito concluído ainda..." : `${(habitosMarcados.length/habitosDia.length) * 100}% dos hábitos concluídos `}</SubTitulo>
             </TituloTela>
             <EspacoHabitosDia>
-                {habitosDia.length === 0 ? "Carregando..." : habitosDia.map( habitoDia => {
+                {habitosDia.length === 0 ? 
+                "Carregando..." 
+                : 
+                habitosDia.map( (habitoDia, index) => {
                     return <HabitoDia 
+                        key={index}
                         habitoDia={habitoDia}
                         habitosDia={habitosDia}
                         setHabitosMarcados={setHabitosMarcados}

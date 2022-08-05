@@ -96,8 +96,8 @@ export default function NovoHabito( {criandoHabito, setCriandoHabito}) {
                 disabled={disabled}
             />
             <DiasSemana>
-                {dias.map(dia => {
-                    return <DiaSemana dia={dia} criando={true}/>
+                {dias.map((dia, index) => {
+                    return <DiaSemana key={index} dia={dia} criando={true}/>
                 })}
             </DiasSemana>
             <Botoes>
