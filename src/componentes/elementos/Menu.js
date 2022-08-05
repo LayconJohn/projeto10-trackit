@@ -1,14 +1,28 @@
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
+import { CircularProgressbar, buildStyles } from 'react-circular-progressbar';
 
-
-export default function Menu() {
+export default function Menu( {percentual} ) {
     const navigate = useNavigate();
 
     return (
         <Footer>
             <AbaMenu onClick={() => navigate("/habitos")}>Hábitos</AbaMenu>
-            <BotaoHoje onClick={() => navigate("/hoje")}>Hoje</BotaoHoje>
+            <BotaoHoje onClick={() => navigate("/hoje")}>
+                <CircularProgressbar
+                    value={percentual}
+                    background
+                    backgroundPadding={6}
+                    
+                    styles={buildStyles({
+                        backgroundColor: "#52B6FF",
+                        textColor: "#fff",
+                        pathColor: "#fff",
+                        trailColor: "transparent"
+                      })}
+                />
+                <ProgressoHoje>Hoje</ProgressoHoje>
+            </BotaoHoje>
             <AbaMenu onClick={() => navigate("/historico")}>Histórico</AbaMenu>
         </Footer>
     )
@@ -45,6 +59,22 @@ const BotaoHoje = styled.div`
     margin: 0 auto;
     border: 1px solid #52B6FF;
     z-index: 2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.2);
+
+`;
+
+
+const ProgressoHoje = styled.div`
+    height: 79px;
+    width: 69px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: fixed;
+    bottom: 20px;
+    z-index: 3;
 `;
 
 const AbaMenu = styled.span`

@@ -16,6 +16,7 @@ export default function Hoje() {
     //state
     const [habitosDia, setHabitosDia] = useState([]);
     const [habitosMarcados, setHabitosMarcados] = useState([]);
+    const [percentualConcluido, setPercentualConcluido] = useState("...");
 
     //hooks
     const {user} = useContext(UserContext);
@@ -23,9 +24,10 @@ export default function Hoje() {
     //logic
     useEffect( () => {
         getHabitosDia(user.token).then( (res) => {
-            setHabitosDia(res.data)
-            setHabitosMarcados(habitosDia.filter( habito => habito.done === true))
-        })
+            setHabitosDia(res.data);
+            setHabitosMarcados(habitosDia.filter( habito => habito.done === true));
+            setPercentualConcluido((habitosMarcados.length/habitosDia.length) * 100)
+        });
     }, [habitosMarcados])
 
     //render
@@ -34,7 +36,12 @@ export default function Hoje() {
             <Topo />
             <TituloTela isDisplay="">
                 <h2>{dayjs().locale('pt-br').format("dddd, DD/MM")}</h2>
-                <SubTitulo habitoFeito={habitosMarcados.lenght === 0}>{habitosMarcados.lenght === 0 ? "Nenhum hábito concluído ainda..." : `${(habitosMarcados.length/habitosDia.length) * 100}% dos hábitos concluídos `}</SubTitulo>
+                <SubTitulo habitoFeito={habitosMarcados.lenght === 0}>
+                    {habitosMarcados.lenght === 0 ? 
+                        "Nenhum hábito concluído ainda..." 
+                        : 
+                        `${percentualConcluido}% dos hábitos concluídos `}
+                </SubTitulo>
             </TituloTela>
             <EspacoHabitosDia>
                 {habitosDia.length === 0 ? 
@@ -49,7 +56,7 @@ export default function Hoje() {
                     />
                 })}
             </EspacoHabitosDia>
-            <Menu />
+            <Menu percentual={percentualConcluido}/>
         </Tela>
     )
 }
