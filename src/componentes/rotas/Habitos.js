@@ -12,7 +12,7 @@ import Habito from "../elementos/Habito";
 
 import { getHabitos } from "../../servicos/trackIt";
 
-export default function Habitos() {
+export default function Habitos( {percentualConcluido} ) {
     //state
     const [habitos, setHabitos] = useState([]);
     const [criandoHabito, setCriandoHabito] = useState(false);
@@ -56,7 +56,7 @@ export default function Habitos() {
                 })
                 }
             </EspacoHabitos>
-            <Menu />
+            <Menu percentual={percentualConcluido}/>
         </Tela>
     )
 }

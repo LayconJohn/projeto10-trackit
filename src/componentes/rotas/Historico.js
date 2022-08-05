@@ -5,7 +5,7 @@ import { Tela } from "../globalStyled";
 import Menu from '../elementos/Menu';
 import TituloTela from "../elementos/TituloTela";
 
-export default function Historico() {
+export default function Historico( {percentualConcluido} ) {
     return (
         <Tela>
             <Topo />
@@ -13,7 +13,7 @@ export default function Historico() {
                 <h2>Histórico</h2>
                 <Subtitulo>Em breve você poderá ver o histórico dos seus hábitos aqui!</Subtitulo>
             </TituloTela>
-            <Menu />
+            <Menu percentual={percentualConcluido}/>
         </Tela>
     )
 }

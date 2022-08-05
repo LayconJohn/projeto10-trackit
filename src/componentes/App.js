@@ -11,6 +11,7 @@ import Historico from "./rotas/Historico";
 
 export default function App() {
     const [user, setUser] = useState({});
+    const [percentualConcluido, setPercentualConcluido] = useState("");
 
     return(
         <BrowserRouter>
@@ -18,9 +19,12 @@ export default function App() {
         <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/cadastro" element={<Cadastro />} />  
-            <Route path="/habitos" element={<Habitos />} />
-            <Route path="/hoje" element={<Hoje />} />  
-            <Route path="/historico" element={<Historico />} />      
+            <Route path="/habitos" element={<Habitos percentualConcluido={percentualConcluido}/>} />
+            <Route path="/hoje" element={<Hoje 
+                percentualConcluido={percentualConcluido}
+                setPercentualConcluido={setPercentualConcluido}    
+            />} />  
+            <Route path="/historico" element={<Historico percentualConcluido={percentualConcluido}/>} />      
         </Routes>
         </UserContext.Provider>
         </BrowserRouter>

@@ -12,11 +12,11 @@ import { Tela } from "../globalStyled";
 import Menu from '../elementos/Menu';
 import HabitoDia from "../elementos/HabitoDia";
 
-export default function Hoje() {
+export default function Hoje( {percentualConcluido, setPercentualConcluido}) {
     //state
     const [habitosDia, setHabitosDia] = useState([]);
     const [habitosMarcados, setHabitosMarcados] = useState([]);
-    const [percentualConcluido, setPercentualConcluido] = useState("...");
+    
 
     //hooks
     const {user} = useContext(UserContext);

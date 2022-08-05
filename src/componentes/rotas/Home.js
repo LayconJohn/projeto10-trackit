@@ -43,7 +43,7 @@ export default function Home() {
                 image: data.image,
                 name: data.name  
             })
-            navigate("/habitos");
+            navigate("/hoje");
         })
             .catch( (err) => {
                 console.log(err);
