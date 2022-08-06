@@ -46,6 +46,11 @@ export default function NovoHabito( {criandoHabito, setCriandoHabito}) {
             name: nomeHabito,
             days: diasSelecionados.filter(value => value !== null)
         }
+
+        if (body.days.length === 0 ) {
+            alert("Selecione pelo menos um dia da semana");
+            return;
+        }
         postHabito(user.token, body)
             .then( (res) => {
                 setDisabled(false)
@@ -68,6 +73,8 @@ export default function NovoHabito( {criandoHabito, setCriandoHabito}) {
             case 422:
                 alert("Houve um erro, tente novamente");
                 break;
+            default:
+                alert("Houve um erro inesperado. Recarregue a página")
         }
         resetarCriacaoHabito();
     }
