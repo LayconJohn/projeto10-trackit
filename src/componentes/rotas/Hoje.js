@@ -14,7 +14,7 @@ import HabitoDia from "../elementos/HabitoDia";
 
 export default function Hoje( {percentualConcluido, setPercentualConcluido}) {
     //state
-    const [habitosDia, setHabitosDia] = useState([]);
+    const [habitosDia, setHabitosDia] = useState([0]);
     const [habitosMarcados, setHabitosMarcados] = useState([]);
     
 
@@ -26,7 +26,7 @@ export default function Hoje( {percentualConcluido, setPercentualConcluido}) {
         getHabitosDia(user.token).then( (res) => {
             setHabitosDia(res.data);
             setHabitosMarcados(habitosDia.filter( habito => habito.done === true));
-            setPercentualConcluido((habitosMarcados.length/habitosDia.length) * 100)
+            setPercentualConcluido(((habitosMarcados.length/habitosDia.length) * 100).toFixed(2))
         });
     }, [habitosMarcados])
 
