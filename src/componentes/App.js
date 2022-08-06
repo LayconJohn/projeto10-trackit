@@ -11,7 +11,7 @@ import Historico from "./rotas/Historico";
 
 export default function App() {
     const [user, setUser] = useState({});
-    const [percentualConcluido, setPercentualConcluido] = useState("");
+    const [percentualConcluido, setPercentualConcluido] = useState(0);
 
     return(
         <BrowserRouter>

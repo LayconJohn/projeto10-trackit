@@ -40,7 +40,7 @@ export default function Hoje( {percentualConcluido, setPercentualConcluido}) {
                     {habitosMarcados.lenght === 0 ? 
                         "Nenhum hábito concluído ainda..." 
                         : 
-                        `${percentualConcluido}% dos hábitos concluídos `}
+                        `${percentualConcluido === NaN ? "0" : percentualConcluido}% dos hábitos concluídos `}
                 </SubTitulo>
             </TituloTela>
             <EspacoHabitosDia>
