@@ -1,4 +1,4 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { loginUser } from "../../servicos/trackIt";
@@ -9,7 +9,7 @@ import logo from "../../assets/images/logoPrincipal.png";
 import { Tela, Form, BotaoForm, LinkRota, EspacoForm, Logo } from "../globalStyled";
 import UserContext from "../../context/UserContext";
 
-export default function Home() {
+export default function Home( {setToken}) {
     //state
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -17,9 +17,15 @@ export default function Home() {
 
     //hooks
     const navigate = useNavigate();
-    const {setUser} = useContext(UserContext);
+    const {user, setUser} = useContext(UserContext);
 
     //logic
+    useEffect( () => {
+        if (localStorage.getItem('token')) {
+            navigate('/hoje')
+        }
+    }, [])
+
     function resetarForm() {
         setEmail("");
         setPassword("");
@@ -43,6 +49,9 @@ export default function Home() {
                 image: data.image,
                 name: data.name  
             })
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('image', data.image);
+            localStorage.setItem('name', data.name);
             navigate("/hoje");
         })
             .catch( (err) => {

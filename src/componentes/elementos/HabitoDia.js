@@ -14,9 +14,11 @@ export default function HabitoDia({ habitoDia, habitosDia, setHabitosMarcados })
     //logic
 
     function desmarcarHabito() {
+        const token = localStorage.getItem('token');
+
         habitoDia.done = false;
         setHabitoFeito(false);
-        uncheckHabito(user.token, habitoDia.id)
+        uncheckHabito(token, habitoDia.id)
             .then( (res) => {
                 console.log(res)
             })
@@ -26,9 +28,11 @@ export default function HabitoDia({ habitoDia, habitosDia, setHabitosMarcados })
     }
 
     function marcarHabito() {
+        const token = localStorage.getItem('token');
+
         habitoDia.done = true;
         setHabitoFeito(true);
-        checkHabito(user.token, habitoDia.id)
+        checkHabito(token, habitoDia.id)
             .then((res) => {
                 console.log(res);
             })

@@ -51,7 +51,11 @@ export default function NovoHabito( {criandoHabito, setCriandoHabito}) {
             alert("Selecione pelo menos um dia da semana");
             return;
         }
-        postHabito(user.token, body)
+
+        //localStorage
+        const token = localStorage.getItem('token');
+
+        postHabito(token, body)
             .then( (res) => {
                 setDisabled(false)
                 console.log(res.data)

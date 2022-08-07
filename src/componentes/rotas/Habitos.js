@@ -23,7 +23,9 @@ export default function Habitos( {percentualConcluido} ) {
     //logic
 
     useEffect( () => {  
-        getHabitos(user.token).then((res) => {
+        const token = localStorage.getItem('token');
+
+        getHabitos(token).then((res) => {
             setHabitos(res.data)
             console.log(res.data)
         })

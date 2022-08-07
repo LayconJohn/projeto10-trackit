@@ -23,7 +23,9 @@ export default function Hoje( {percentualConcluido, setPercentualConcluido}) {
 
     //logic
     useEffect( () => {
-        getHabitosDia(user.token).then( (res) => {
+        const token = localStorage.getItem('token');
+
+        getHabitosDia(token).then( (res) => {
             setHabitosDia(res.data);
             setHabitosMarcados(habitosDia.filter( habito => habito.done === true));
             setPercentualConcluido(((habitosMarcados.length/habitosDia.length) * 100).toFixed(2))
