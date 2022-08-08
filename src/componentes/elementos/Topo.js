@@ -45,6 +45,6 @@ const FotoPerfil = styled.img`
     width: 51px;
     height: 51px;
     border-radius: 100px;
-    object-fit: co;
+    object-fit: cover;
     border: 1px solid rgbs(0, 0, 0, 0.4)
 `;
