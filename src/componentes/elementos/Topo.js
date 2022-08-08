@@ -1,18 +1,32 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
+import {MdLogout} from 'react-icons/md';
 
 import UserContext from "../../context/UserContext";
 
 export default function Topo() {
 
     const navigate = useNavigate();
-    const {user} = useContext(UserContext)
+    const {user} = useContext(UserContext);
+
+    function deslogar() {
+        if (window.confirm("Você deseja mesmo sair da sua conta?")) {
+            localStorage.setItem('token', "");
+            navigate('/')
+        }
+
+    }
 
     return (
         <Header>
             <MiniLogo onClick={() => navigate("/")}>TrackIt</MiniLogo>
-            <FotoPerfil src={localStorage.getItem('image')} alt={localStorage.getItem('name')}/>
+            
+            <AreaPerfil>
+                <IconeLogOut onClick={deslogar}> <MdLogout /> </IconeLogOut>
+                <FotoPerfil src={localStorage.getItem('image')} alt={localStorage.getItem('name')}/>
+            </AreaPerfil>
+            
         </Header>
     )
 }
@@ -39,6 +53,20 @@ const MiniLogo = styled.h2`
     font-family: 'Playball', cursive;
     color: #FFF;
     font-weight: 400;
+`;
+
+const AreaPerfil = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+const IconeLogOut = styled.div`
+    width: 60px;
+    height: 60px;
+    font-size: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 `;
 
 const FotoPerfil = styled.img`
